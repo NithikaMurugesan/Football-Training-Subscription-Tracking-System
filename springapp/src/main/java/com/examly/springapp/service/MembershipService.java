@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exception.MembershipNotFoundException;
 import com.examly.springapp.model.Membership;
 import com.examly.springapp.repository.MembershipRepository;
 
@@ -17,7 +18,8 @@ public class MembershipService {
         return repo.save(m);
     }
     public Membership getMembershipbyId(Long id){
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(() -> 
+            new MembershipNotFoundException("Membership not found with id: " + id));
     }
     public List<Membership> getallMembership(){
         return repo.findAll();
