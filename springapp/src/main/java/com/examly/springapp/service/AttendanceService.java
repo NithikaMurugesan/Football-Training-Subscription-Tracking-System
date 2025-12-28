@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.examly.springapp.exception.AttendanceNotFoundException;
 import com.examly.springapp.model.Attendance;
 import com.examly.springapp.repository.AttendanceRepository;
 
@@ -34,3 +34,4 @@ public class AttendanceService {
     }
 
 }
+
