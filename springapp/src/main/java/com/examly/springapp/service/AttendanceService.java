@@ -16,7 +16,8 @@ public class AttendanceService {
         return repo.save(a);
     }
     public Attendance getAttendance(Long id){
-        return repo.findById(id).orElse(null); 
+        return repo.findById(id).orElseThrow(() -> 
+                    new AttendanceNotFoundException("Attendance not found with id: " + id)); 
     }
     public List<Attendance> getAllAttendances(){
         return repo.findAll();
@@ -31,4 +32,5 @@ public class AttendanceService {
         }
         return repo.save(existing);
     }
+
 }
