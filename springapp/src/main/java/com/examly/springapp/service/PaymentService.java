@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exception.PaymentNotFoundException;
 import com.examly.springapp.model.Payment;
 import com.examly.springapp.repository.PaymentRepository;
 
@@ -16,7 +17,8 @@ public class PaymentService implements PaymentServiceImpl{
         return repo.save(p);
     }
     public Payment getPayment(Long id){
-        return repo.findById(id).orElse(null); 
+        return repo.findById(id).orElseThrow(() -> 
+            new PaymentNotFoundException("Payment not found with id: " + id)); 
     }
     public List<Payment> getAllPayment(){
         return repo.findAll();
