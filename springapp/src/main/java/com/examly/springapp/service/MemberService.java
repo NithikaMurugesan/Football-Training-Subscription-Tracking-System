@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exception.MemberNotFoundException;
 import com.examly.springapp.model.Member;
 import com.examly.springapp.repository.MemberRepository;
 
@@ -24,7 +25,8 @@ public class MemberService implements MemberServiceImpl{
     }
 
     public Member getMemberById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(() -> 
+            new MemberNotFoundException("Member not found with id: " + id));
     }
 
     public Member updateMember(Long id, Member member) {
